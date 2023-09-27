@@ -1,0 +1,14 @@
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\bin\Debug\net7.0\ChooseMemeServer.exe
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\bin\Debug\net7.0\ChooseMemeServer.deps.json
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\bin\Debug\net7.0\ChooseMemeServer.runtimeconfig.json
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\bin\Debug\net7.0\ChooseMemeServer.dll
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\bin\Debug\net7.0\ChooseMemeServer.pdb
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\obj\Debug\net7.0\ChooseMemeServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\obj\Debug\net7.0\ChooseMemeServer.AssemblyInfoInputs.cache
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\obj\Debug\net7.0\ChooseMemeServer.AssemblyInfo.cs
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\obj\Debug\net7.0\ChooseMemeServer.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\obj\Debug\net7.0\ChooseMemeServer.dll
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\obj\Debug\net7.0\refint\ChooseMemeServer.dll
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\obj\Debug\net7.0\ChooseMemeServer.pdb
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\obj\Debug\net7.0\ChooseMemeServer.genruntimeconfig.cache
+C:\Users\Lenovo\source\repos\ChooseMemeServer\ChooseMemeServer\obj\Debug\net7.0\ref\ChooseMemeServer.dll
