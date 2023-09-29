@@ -21,7 +21,20 @@ namespace ChooseMemeServer
         ClientDisconnectedFromLobby, //server
         SetNewHost, //server
         StartGame, //client
-        StartedGame //server
+
+        StartingGameGameEvent, //server
+        ReadingTheQuestionGameEvent, //server
+        ChoseTheCardGameEvent, //server
+        AfterChosedCardGameEvent, //server
+        StartVoteForCardGameEvent, //server
+        VotingForCardGameEvent, //server
+        VoteForCardGameEvent, //client
+        GivingAnotherCardGameEvent, //server
+        EndGameGameEvent, //server
+
+        AddCardGameEvent, //server
+        ChoseCardGameEvent, //client
+        RemoveCardGameEvent, //server
     }
 
     public class Server
@@ -192,6 +205,22 @@ namespace ChooseMemeServer
 
                                         break;
                                     }
+                                case MultiplayerEvents.ChoseCardGameEvent:
+                                    {
+                                        CardDTO? cardDTO = JsonSerializer.Deserialize<CardDTO>(queries.Dequeue());
+
+                                        client.getLobby()!.GetGame()!.ClientChooseCard(client, cardDTO!);
+
+                                        break;
+                                    }
+                                case MultiplayerEvents.VoteForCardGameEvent:
+                                    {
+                                        CardDTO? cardDTO = JsonSerializer.Deserialize<CardDTO>(queries.Dequeue());
+
+                                        client.getLobby()!.GetGame()!.ClientVoteForCard(client, cardDTO!);
+
+                                        break;
+                                    }
                             }
                         }
                         else
@@ -217,7 +246,7 @@ namespace ChooseMemeServer
 
         private async void AskForLobbies(Client client)
         {
-            string query = Queries.ReturnLobbiesQuery(_lobbies);
+            string query = Queries.ReturnLobbiesQuery(_lobbies.Where(l => !l.getHided()).ToList());
 
             await client.GetTcpClient().GetStream().WriteAsync(Encoding.UTF8.GetBytes(query));
         }
@@ -249,7 +278,7 @@ namespace ChooseMemeServer
         {
             Lobby lobby = _lobbies.First(f => f.getId() == lobbyDTO.id);
 
-            if(lobby.getNumOfClients() == lobby.getMaxNumOfClients())
+            if (lobby.getNumOfClients() == lobby.getMaxNumOfClients())
             {
                 return;
             }
@@ -287,11 +316,11 @@ namespace ChooseMemeServer
             {
                 lobby.RemoveClient(client);
 
-                if(lobby.getClients().Count() == 0)
+                if (lobby.getClients().Count() == 0)
                 {
                     _lobbies.Remove(lobby);
                 }
-                else if(client == lobby.GetHost())
+                else if (client == lobby.GetHost())
                 {
                     Client newHostClient = lobby.getClients()[0];
                     lobby.SetHost(newHostClient);
@@ -301,7 +330,10 @@ namespace ChooseMemeServer
                     await newHostClient.GetTcpClient().GetStream().WriteAsync(Encoding.UTF8.GetBytes(quary));
                 }
 
-               
+                if(lobby.GetGame() != null)
+                {
+                    lobby.GetGame()?.DisconnectFromGame(client);
+                }
 
                 string query = Queries.ClientDisconnectedFromLobbyQuery(client);
 
@@ -321,22 +353,14 @@ namespace ChooseMemeServer
         {
             Lobby? l = c.getLobby();
 
-            if(l != null && c == l.GetHost())
+            if (l != null && c == l.GetHost())
             {
-                string query = MultiplayerEvents.StartedGame.ToString() + "\n";
+                Game game = new Game(l);
 
-                foreach (var player in l.getClients())
-                {
-                    await player.GetTcpClient().GetStream().WriteAsync(Encoding.UTF8.GetBytes(query));
-                }
-
-                await Task.Run(() => { GameManagement(l); });
+                await Task.Run(() => { game.StartGame(); });
             }
         }
 
-        public void GameManagement(Lobby? l)
-        {
 
-        }
     }
 }

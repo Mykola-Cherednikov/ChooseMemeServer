@@ -12,6 +12,10 @@
 
         private int _maxNumOfClients;
 
+        private Game? game;
+
+        private bool isHided;
+
         public Lobby(int id, string name, int maxNumOfClients, Client c)
         {
             _id = id;
@@ -65,6 +69,26 @@
         public void SetHost(Client c)
         {
             host = c;
+        }
+
+        public void SetGame(Game game)
+        {
+            this.game = game;
+        }
+
+        public Game? GetGame()
+        {
+            return game;
+        }
+
+        public bool getHided()
+        {
+            return isHided;
+        }
+
+        public void setHided(bool b)
+        {
+            isHided = b;
         }
     }
 }
